@@ -1,9 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
-import { Image, StyleSheet, View,Dimensions, Text } from 'react-native'
+import { Image, StyleSheet, View, Dimensions, Text, ActivityIndicator } from 'react-native';
 import { RootStackParams } from '../Navigator/Navigation'
 import { ScrollView } from 'react-native-gesture-handler';
-import  Icon from 'react-native-vector-icons/Ionicons';
+import { useMovieDetails } from '../hooks/useMovieDetail';
+import { MovieDetails } from '../components';
 
 
 const {height:scrennHeight}=Dimensions.get('screen');
@@ -15,6 +16,11 @@ export const DetailScreen = ({route}:Props) => {
 
   const uri=`https://image.tmdb.org/t/p/w500${Movie.poster_path}`;
 
+  const { cast,
+    isLoadin,
+    movieFull,}=useMovieDetails(Movie.id)
+
+    
 
   return (
 
@@ -40,12 +46,8 @@ export const DetailScreen = ({route}:Props) => {
       </Text>
       
     </View>
-    <View style={styles.marginContaner}>
-      <Icon
-        name='star-outline'
-        color='grey'
-        size={20}
-      />
+    <View style={{marginTop:0}}>
+      {isLoadin ? <ActivityIndicator size={35} color="grey" style={{marginTop:20}}/>: <MovieDetails movieFull={movieFull!} cast={cast}/>}
     </View>
 
     </ScrollView>
