@@ -12,4 +12,8 @@ Simultaneous promises
 Carousels
 And more
 
-![Uploading Video de WhatsApp 2023-09-25 a las 22.15.38.gif…]()
+
+
+
+https://github.com/alberto8812/APPMovie-React-Native/assets/101751073/eb9f4189-d161-459a-b9ec-78a87051f3dc
+
