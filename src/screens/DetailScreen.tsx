@@ -1,20 +1,27 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
-import { Image, StyleSheet, View,Dimensions, Text } from 'react-native'
-import { RootStackParams } from '../Navigator/Navigation'
+import { Image, StyleSheet, View, Dimensions, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { RootStackParams, Navigation } from '../Navigator/Navigation';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useMovieDetails } from '../hooks/useMovieDetail';
+import { MovieDetails } from '../components';
 import  Icon from 'react-native-vector-icons/Ionicons';
 
 
 const {height:scrennHeight}=Dimensions.get('screen');
 interface Props extends StackScreenProps<RootStackParams,'DetailScreen'>{};
 
-export const DetailScreen = ({route}:Props) => {
+export const DetailScreen = ({route,navigation}:Props) => {
 
   const Movie=route.params;
 
   const uri=`https://image.tmdb.org/t/p/w500${Movie.poster_path}`;
 
+  const { cast,
+    isLoadin,
+    movieFull,}=useMovieDetails(Movie.id)
+
+    
 
   return (
 
@@ -40,12 +47,21 @@ export const DetailScreen = ({route}:Props) => {
       </Text>
       
     </View>
-    <View style={styles.marginContaner}>
-      <Icon
-        name='star-outline'
-        color='grey'
-        size={20}
-      />
+    <View style={{marginTop:0}}>
+      {isLoadin ? <ActivityIndicator size={35} color="grey" style={{marginTop:20}}/>: <MovieDetails movieFull={movieFull!} cast={cast}/>}
+    </View>
+
+    <View style={styles.backButton}>
+      <TouchableOpacity 
+       onPress={() => navigation.pop()}
+      >
+        <Icon 
+         color={'white'}
+         size={60}
+         name='chevron-back-outline'
+        />
+
+      </TouchableOpacity>
     </View>
 
     </ScrollView>
@@ -90,5 +106,12 @@ const styles=StyleSheet.create({
     fontWeight:'bold',
 
   },
+  backButton:{
+    position:'absolute',
+    zIndex:999,
+    top:30,
+    left:9,
+    elevation:5,
+  }
 
 })
