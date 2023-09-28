@@ -2,7 +2,7 @@ import React from 'react'
 import { ActivityIndicator, Dimensions, ScrollView, View } from 'react-native'
 import movieDB from '../api/movieDB'
 import { useMovies } from '../hooks/useMovies'
-import { HorizontalSlider, MovieCard } from '../components'
+import { GradientBackground, HorizontalSlider, MovieCard } from '../components'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Carousel from 'react-native-snap-carousel';
 
@@ -21,6 +21,9 @@ const {top}=useSafeAreaInsets();
 
 
   return (
+    <GradientBackground>
+
+    
     <ScrollView>
     <View style={{marginTop:top+20}}>
      <View style={{height:440}}>
@@ -38,5 +41,6 @@ const {top}=useSafeAreaInsets();
      <HorizontalSlider title={'Upcoming'} movies={upComing}/>
     </View>
     </ScrollView>
+    </GradientBackground>
   )
 }

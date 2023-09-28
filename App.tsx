@@ -8,8 +8,8 @@ import { FacdeScreen } from './src/screens/FacdeScreen';
 export const App = () => {
   return (
     <NavigationContainer>
-      {/* <Navigation /> */}
-      <FacdeScreen/>
+      <Navigation />
+      {/* <FacdeScreen/> */}
     </NavigationContainer>
   )
 }
