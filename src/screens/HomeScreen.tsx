@@ -6,6 +6,7 @@ import { GradientBackground, HorizontalSlider, MovieCard } from '../components'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Carousel from 'react-native-snap-carousel';
 import ImageColors, {getColors} from 'react-native-image-colors'
+import { getImageColors } from '../helper/getColors'
 
 const {width:windowWidth}=Dimensions.get('window')
 
@@ -19,8 +20,9 @@ const getPosterColors=async(index:number)=>{
 
   const Movie=nowPlaying[index];
   const uri=`https://image.tmdb.org/t/p/w500${Movie.poster_path}`;
-  const colors=await ImageColors.getColors(uri, {})
-  console.log(colors)
+
+  const [primary,secondary]=await getImageColors(uri)
+  console.log(primary,secondary)
 }
 
 
