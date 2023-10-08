@@ -11,7 +11,7 @@ export const useFade = (props:number) => {
     /**
      * cuando el 
      */
-    const fadeIn=()=>{
+    const fadeIn=(callback?:Function)=>{
         Animated.timing(
             opacity,//valor a cambiar el valor
             {
@@ -19,7 +19,7 @@ export const useFade = (props:number) => {
                 duration:300,//tiempo que tarde
                 useNativeDriver:true//hace que se acelreado por hardware
             }
-        ).start();//resive un colva para que dispare una accion 
+        ).start(()=>callback?callback():null);//resive un colva para que dispare una accion 
     }
 
     const FadeOut=()=>{
